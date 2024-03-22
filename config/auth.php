@@ -17,6 +17,8 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+	
+	'shared_token' => env("SHARED_TOKEN"),
 
     /*
     |--------------------------------------------------------------------------
