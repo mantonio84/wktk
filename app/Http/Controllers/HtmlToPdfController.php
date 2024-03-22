@@ -9,7 +9,7 @@ class HtmlToPdfController extends Controller
 {
     public function convert(Request $request){
 		$request->validate([
-			"file" => ["required","file","mimes:html","min:1"]
+			"file" => ["required","file","mimes:html","min:0.1"]
 		]);
 		$tmp=GetSysTempFilePath("html");
 		copy($request->file("file")->getPathname(),$tmp);
