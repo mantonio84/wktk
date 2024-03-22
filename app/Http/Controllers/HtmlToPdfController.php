@@ -13,9 +13,11 @@ class HtmlToPdfController extends Controller
 		]);
 		$tmp=GetSysTempFilePath("html");
 		copy($request->file("file")->getPathname(),$tmp);
-		return app('snappy.pdf.wrapper')
+		$rep=app('snappy.pdf.wrapper')
 				->loadFile($tmp)
 				->setOptions(Arr::except($request->all(),"file"))				
 				->inline();		
+		unlink($tmp);
+		return $rep;
 	}
 }
