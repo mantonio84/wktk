@@ -11,7 +11,6 @@ class HtmlToPdfController extends Controller
 		$request->validate([
 			"file" => ["required","file","mimes:html"]
 		]);
-		dd($request->input());
 		$tmp=GetSysTempFilePath("html");
 		copy($request->file("file")->getPathname(),$tmp);
 		return app('snappy.pdf.wrapper')
@@ -21,9 +20,6 @@ class HtmlToPdfController extends Controller
 	}
 	
 	private function extractOptionsFromRequest(Request $request){
-		return Arr::except($request->input(),[
-			"file",
-			"app_secret"
-		]);
+		return $request->input();
 	}
 }
