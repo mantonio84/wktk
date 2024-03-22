@@ -12,7 +12,7 @@ class HtmlToPdfController extends Controller
 			"file" => ["required","file","mimes:html"]
 		]);
 		return app('snappy.pdf.wrapper')
-				->loadFile($request->file("file")->path())
+				->loadFile($request->file("file")->getPathname())
 				->setOptions(Arr::except($request->all(),"file"))				
 				->inline();		
 	}
