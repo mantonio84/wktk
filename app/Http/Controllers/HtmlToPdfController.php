@@ -15,9 +15,16 @@ class HtmlToPdfController extends Controller
 		copy($request->file("file")->getPathname(),$tmp);
 		$rep=app('snappy.pdf.wrapper')
 				->loadFile($tmp)
-				->setOptions(Arr::except($request->all(),"file"))				
+				->setOptions($this->extractOptionsFromRequest($request));
 				->inline();		
 		unlink($tmp);
 		return $rep;
+	}
+	
+	private function extractOptionsFromRequest(Request $request){
+		return Arr::except($request->input(),[
+			"file",
+			"app_secret"
+		]);
 	}
 }
